@@ -1,7 +1,7 @@
 /*********************************************************************
 * DataLogger class                               				         *
 *                                                                    *
-* A class to log data in a table like format example:                * 
+* A class to log data in a table-like format example:                * 
 * Field 1 | Field 2 | Field 3 | ...                                  *
 * dataA1  | dataA2  | dataA3  |...                                   *
 * dataB1  | dataB2  | dataB3  |...                                   *
@@ -22,7 +22,7 @@
 #include "ilogger.h"
 #include "traits.h"
 
-class DataLogger : public ILogger
+class DataLogger //: public ILogger
 {
 	private:
 		static constexpr int c_mx_separator_size=30;
@@ -37,10 +37,6 @@ class DataLogger : public ILogger
 		 * 
 		 **/ 
 		DataLogger(const char* filePath, const char* separator = " # ");
-
-		DataLogger()=delete;
-		DataLogger(const DataLogger&)=delete;
-
 		virtual ~DataLogger();
 
 		/*
@@ -89,9 +85,11 @@ class DataLogger : public ILogger
 		 * 
 		 * */
 		void flushBuffer();
-	
-	private:
-	
+
+		template<typename T>
+		void addDataT(const char* fieldName, T data);
+
+	private:	
 		std::ofstream m_logFile;
 		std::vector<char*> m_buffer;
 		std::vector<const char*> m_header;
@@ -100,12 +98,9 @@ class DataLogger : public ILogger
 		char m_separator[c_mx_separator_size];
 		const int c_mxWidth;
 
+		DataLogger()=delete;
+		DataLogger(const DataLogger&)=delete;
 		std::string setPath(const char* filePath);
-		
-	protected:
-		template<typename T>
-		void addDataT(const char* fieldName, T data);
-
 };
 
 template<typename T>

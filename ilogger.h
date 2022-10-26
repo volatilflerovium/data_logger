@@ -56,6 +56,9 @@ class ILogger
 		 * 
 		 * */
 		virtual void flushBuffer()=0;
+		
+		virtual ~ILogger()
+		{};
 };
 
 #endif
