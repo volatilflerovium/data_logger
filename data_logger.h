@@ -17,12 +17,11 @@
 #include <map>
 #include <string>
 #include <cstring>
-//#include <sys/stat.h>
 #include <filesystem>
 #include "ilogger.h"
 #include "traits.h"
 
-class DataLogger //: public ILogger
+class DataLogger
 {
 	private:
 		static constexpr int c_mx_separator_size=30;
@@ -44,7 +43,8 @@ class DataLogger //: public ILogger
 		 * 
 		 * @param line const char* to be printed in a new line
 		 * */
-		void printLine(const char* line){
+		void printLine(const char* line)
+		{
 			m_logFile << line << '\n';
 			m_logFile.flush();
 		}
@@ -62,8 +62,8 @@ class DataLogger //: public ILogger
 		 * @param fieldName the name of the header for the specific column
 		 * @param align the aligment for the data in that column values:
 		 *        'l' for left align, 'c' center, 'r' right
-		 * @param with the maximum length for the column if it is 0 then
-		 *        it will be the same as the length of the header. 
+		 * @param width the maximum number of character width for the column 
+		 *        if it is 0 then it will be the same as the width of the header. 
 		 * 
 		 * printHeader should be called after the last call to addHeaderField.
 		 * 
@@ -76,7 +76,8 @@ class DataLogger //: public ILogger
 		 * Add an explicit new line.
 		 * 
 		 * */
-		void breakLine() {
+		void breakLine() 
+		{
 			m_logFile << "\n";
 		}
 	
@@ -104,7 +105,8 @@ class DataLogger //: public ILogger
 };
 
 template<typename T>
-void DataLogger::addDataT(const char* fieldName, T data) {			
+void DataLogger::addDataT(const char* fieldName, T data) 
+{			
 	if(m_fieldPosition.find(fieldName)==m_fieldPosition.end()){
 		return;
 	}
