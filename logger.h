@@ -14,43 +14,53 @@ class Logger : public ILogger
 		virtual ~Logger()
 		{}
 
-		void addData(const char* field, int data) { 
+		void addData(const char* field, int data) 
+		{ 
 			m_dataLogger.addDataT(std::move(field), data);
 		}
 		
-		void addData(const char* field, const char* data) { 
+		void addData(const char* field, const char* data) 
+		{ 
 			m_dataLogger.addDataT(std::move(field), std::move(data));
 		}
 		
-		void addData(const char* field, const std::string& data) { 
+		void addData(const char* field, const std::string& data) 
+		{ 
 			m_dataLogger.addDataT(std::move(field), data);
 		}
 		
-		void addData(const char* field, bool data) { 
+		void addData(const char* field, bool data) 
+		{ 
 			m_dataLogger.addDataT(std::move(field), data);
 		}
 		
-		void addData(const char* field, float data) { 
+		void addData(const char* field, float data)
+		{ 
 			m_dataLogger.addDataT(std::move(field), data);
 		}
 		
-		void addData(const char* field, double data) { 
+		void addData(const char* field, double data) 
+		{ 
 			m_dataLogger.addDataT(std::move(field), data);
 		}
 		
-		void printLine(const char* line){
+		void printLine(const char* line)
+		{
 			m_dataLogger.printLine(std::move(line));
 		}
 	
-		void printHeader(){
-			m_dataLogger.printHeader();
+		void printHeaders()
+		{
+			m_dataLogger.printHeaders();
 		}
 
-		void addHeaderField(const char* fieldName, char align, int width = 0){
+		void addHeaderField(const char* fieldName, char align, int width = 0)
+		{
 			m_dataLogger.addHeaderField(std::move(fieldName), align, width);
 		}
 
-		void flushBuffer(){
+		void flushBuffer()
+		{
 			m_dataLogger.flushBuffer();
 		}
 

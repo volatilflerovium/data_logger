@@ -36,7 +36,7 @@ template<>
 struct ToString<bool>
 {
 	static std::string toStr(bool a) {
-		if (a) {
+		if(a){
 			return std::string("true");
 		}
 		return std::string("false");

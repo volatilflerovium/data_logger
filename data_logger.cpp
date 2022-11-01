@@ -1,6 +1,6 @@
 #include "data_logger.h"
 
-//#####################################################################
+//----------------------------------------------------------------------
 
 DataLogger::DataLogger(const char* filePath, const char* separator)
 	:m_logFile(setPath(filePath), std::ios::app),
@@ -17,6 +17,8 @@ DataLogger::DataLogger(const char* filePath, const char* separator)
 
 	std::memcpy(m_separator, std::move(separator), k);
 }
+
+//----------------------------------------------------------------------
 	
 DataLogger::~DataLogger() {
 	m_logFile.close();
@@ -24,6 +26,8 @@ DataLogger::~DataLogger() {
 		delete[] m_buffer[i];
 	}
 }
+
+//----------------------------------------------------------------------
 
 void DataLogger::flushBuffer() {
 	char tmp[100];
@@ -43,14 +47,17 @@ void DataLogger::flushBuffer() {
 	m_logFile << '\n';
 	m_logFile.flush();
 }
+
+//----------------------------------------------------------------------
 	
-	
-void DataLogger::printHeader() {
+void DataLogger::printHeaders() {
 	for (int i = 0; i < m_header.size(); i++) {
 		addDataT(m_header[i], m_header[i]);
 	}
 	flushBuffer();
 }
+
+//----------------------------------------------------------------------
 	
 void DataLogger::addHeaderField(const char* fieldName, char align, int width) {
 	std::string str(fieldName);
@@ -70,12 +77,14 @@ void DataLogger::addHeaderField(const char* fieldName, char align, int width) {
 	m_buffer.push_back(tmp);
 }
 
+//----------------------------------------------------------------------
+
 std::string DataLogger::setPath(const char* filePath) {
 	char buffer[254];
 	int t=strlen(filePath);
 	std::memcpy(buffer, filePath, t*sizeof(char));
 	buffer[t]='\0';
-	char pos = '/';
+	char pos='/';
 	char* ptr = strrchr(buffer, pos); 
 	if(ptr){
 		int r=ptr-buffer+1;
@@ -88,8 +97,4 @@ std::string DataLogger::setPath(const char* filePath) {
 	return filePath;
 }
 
-
-
-
-
-//#####################################################################
+//----------------------------------------------------------------------

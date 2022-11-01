@@ -23,38 +23,31 @@
 
 class DataLogger
 {
-	private:
-		static constexpr int c_mx_separator_size=30;
-
 	public:
 		/*
 		 * Construct
 		 * 
 		 * @param filePath path to the log file
 		 * @param separator string of characters used to separate 
-		 *        the different headers of the log
+		 *        the different columns in the log file
 		 * 
 		 **/ 
 		DataLogger(const char* filePath, const char* separator = " # ");
 		virtual ~DataLogger();
 
 		/*
-		 * Print the input as a new line in the log file.
+		 * Explicitly print the input in a new line in the log file.
 		 * 
 		 * @param line const char* to be printed in a new line
 		 * */
-		void printLine(const char* line)
-		{
-			m_logFile << line << '\n';
-			m_logFile.flush();
-		}
+		void printLine(const char* line);
 	
 	   /*
 	    * Print the headers for the table. This will flush the buffer
 	    * to the log file. 
 	    * 
 	    * */
-		void printHeader();
+		void printHeaders();
 		
 		/*
 		 * Add a header to the table log.
@@ -76,10 +69,7 @@ class DataLogger
 		 * Add an explicit new line.
 		 * 
 		 * */
-		void breakLine() 
-		{
-			m_logFile << "\n";
-		}
+		void breakLine();
 	
 		/*
 		 * Explicitly flush the buffer.
@@ -89,6 +79,9 @@ class DataLogger
 
 		template<typename T>
 		void addDataT(const char* fieldName, T data);
+
+	private:
+		static constexpr int c_mx_separator_size=30;
 
 	private:	
 		std::ofstream m_logFile;
@@ -103,6 +96,23 @@ class DataLogger
 		DataLogger(const DataLogger&)=delete;
 		std::string setPath(const char* filePath);
 };
+
+//----------------------------------------------------------------------
+
+inline void DataLogger::printLine(const char* line)
+{
+	m_logFile << line << '\n';
+	m_logFile.flush();
+}
+
+//----------------------------------------------------------------------
+
+inline void DataLogger::breakLine() 
+{
+	m_logFile << "\n";
+}
+
+//----------------------------------------------------------------------
 
 template<typename T>
 void DataLogger::addDataT(const char* fieldName, T data) 

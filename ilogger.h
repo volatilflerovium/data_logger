@@ -33,7 +33,7 @@ class ILogger
 	    * to the log file. 
 	    * 
 	    * */
-		virtual void printHeader()=0;
+		virtual void printHeaders()=0;
 
 		/*
 		 * Add a header to the table log.

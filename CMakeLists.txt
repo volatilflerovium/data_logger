@@ -19,6 +19,12 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(${CMAKE_BINARY_DIR}/include)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 
+set(release 0)
+
+if(release)
+	add_definitions(-DNDEBUG)
+endif()
+
 set(SOURCES1
 	example.cpp
 	data_logger.cpp

@@ -11,7 +11,7 @@ int main(){
 	logger->addHeaderField("Field 1", 'c');
 	logger->addHeaderField("Field 2", 'r');
 	logger->addHeaderField("Field 3", 'l', 10);
-	logger->printHeader();
+	logger->printHeaders();
 	
 	logger->addData("Field 1", 12);
 	logger->addData("Field 2", 123);
